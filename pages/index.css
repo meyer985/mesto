@@ -2,3 +2,6 @@
 @import url(../fonts/Inter/font.css);
 @import url(../blocks/page/page.css);
 @import url(../blocks/body/body.css);
+@import url(../blocks/header/header.css);
+@import url(../blocks/link/link.css);
+@import url(../blocks/logo/logo.css);
