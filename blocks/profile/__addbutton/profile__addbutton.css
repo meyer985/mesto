@@ -1,0 +1,12 @@
+.profile__addbutton {
+  width: 150px;
+  height: 50px;
+  box-sizing: border-box;
+  border: 2px solid #ffffff;
+  border-radius: 2px;
+  background-image: url(../../../images/cross.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  align-self: center;
+  margin-left: auto;
+}
