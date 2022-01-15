@@ -6,4 +6,9 @@
   background-repeat: no-repeat;
   align-self: center;
   justify-self: center;
+  transition: .3s;
+}
+
+.element__like:hover {
+  opacity: .5;
 }

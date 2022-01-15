@@ -1,13 +1,15 @@
 .info__edit {
-height: 24px;
-width: 24px;
-border: 1px solid #ffffff;
-background-image: url(../../../images/edit.png);
-background-position: center;
-background-repeat: no-repeat;
-box-sizing: border-box;
-justify-self: flex-end;
-align-self: end;
-grid-area: edit;
+  height: 24px;
+  width: 24px;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+  justify-self: flex-end;
+  align-self: end;
+  grid-area: edit;
+  background: none;
+  transition: .3s;
 }
 
+.info__edit:hover {
+  opacity: .6;
+}
