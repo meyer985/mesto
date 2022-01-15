@@ -1,10 +1,19 @@
 .elements {
   max-width: calc(100% - 400px);
+  min-width: 880px;
   margin: 0 auto;
   padding-top: 50px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 282px 282px 282px;
   grid-template-rows: 1fr 1fr;
   grid-column-gap: 17px;
   grid-row-gap: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .elements {
+    min-width: 581px;
+    grid-template-columns: 282px 282px;
+    grid-template-rows: 1fr 1fr 1fr;
+  }
 }
