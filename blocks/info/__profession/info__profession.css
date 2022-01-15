@@ -4,5 +4,12 @@
   font-weight: 400;
   margin: 16px 0 0;
   align-self: start;
+  grid-area: profession;
+}
 
+@media screen and (max-width: 920px) {
+  .info__profession {
+    text-align: center;
+    margin-top: 14px;
+    }
 }

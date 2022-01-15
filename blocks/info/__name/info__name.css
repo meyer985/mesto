@@ -4,4 +4,18 @@
   font-weight: 500;
   margin: 0 0 -8px;
   align-self: end;
+  grid-area: name;
+}
+
+@media screen and (max-width: 920px) {
+  .info__name {
+    font-size: 34px;
+    padding-top: 26px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+  .info__name  {
+    font-size: 27px;
+  }
 }
