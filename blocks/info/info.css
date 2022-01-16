@@ -1,7 +1,7 @@
 .info {
   display: grid;
   grid-template-columns: 1fr 42px;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 60px min-content;
   grid-template-areas:
     "name edit"
     "profession profession";

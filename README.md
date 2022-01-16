@@ -10,4 +10,4 @@
 * Реализация popup редактирования данных профиля на Java Script.
 
 ### Ссылка на проект
-*
+* https://meyer985.github.io/mesto/
