@@ -13,3 +13,10 @@
 .info__edit:hover {
   opacity: .6;
 }
+
+@media screen and (max-width: 600px) {
+  .info__edit {
+    height: 18px;
+    width: 18px;
+  }
+}
