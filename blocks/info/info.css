@@ -3,6 +3,6 @@
   grid-template-columns: 1fr 42px;
   grid-template-rows: 1fr 1fr;
   grid-template-areas:
-  "name edit"
-  "profession profession";
- }
+    "name edit"
+    "profession profession";
+}

@@ -11,11 +11,11 @@
   .info__name {
     font-size: 34px;
     padding-top: 26px;
-    }
+  }
 }
 
 @media screen and (max-width: 600px) {
-  .info__name  {
+  .info__name {
     font-size: 27px;
   }
 }
