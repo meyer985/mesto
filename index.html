@@ -11,51 +11,50 @@
 <body class="body">
   <div class="page">
     <header class="header">
-      <a class="link"><img class="logo" src="./images/Vector.png" alt="логотип"></a>
-      <div class="header__line"></div>
+      <a class="link"><img class="logo" src="./images/Logo_vector.svg" alt="логотип"></a>
     </header>
 
     <main class="main">
       <section class="profile">
         <div class="profile__avatar"></div>
         <div class="profile__info info">
-          <p class="info__name">Жак-Ив Кусто</p>
-          <button class="info__edit"><img src="./images/edit.png" alt="редактировать"></button>
+          <h1 class="info__name">Жак-Ив Кусто</h1>
+          <button type="button" class="info__edit"><img class="info__pen" src="./images/edit.png" alt="редактировать"></button>
           <p class="info__profession">Исследователь океана</p>
         </div>
-        <button class="profile__addbutton"></button>
+        <button type="button" class="profile__addbutton"></button>
       </section>
 
       <section class="elements">
         <div class="element">
           <img src="./images/karachay_2.jpg" alt="Карачаевск" class="element__image">
           <p class="element__text">Карачаевск</p>
-          <div class="element__like"></div>
+          <button type="button" class="element__like"></button>
         </div>
         <div class="element">
           <img src="./images/elbrus_1.jpg" alt="Гора Эльбрус" class="element__image">
           <p class="element__text">Гора Эльбрус</p>
-          <div class="element__like"></div>
+          <button type="button" class="element__like"></button>
         </div>
         <div class="element">
           <img src="./images/dombay_1.jpg" alt="Домбай" class="element__image">
           <p class="element__text">Домбай</p>
-          <div class="element__like"></div>
+          <button type="button" class="element__like"></button>
         </div>
         <div class="element">
           <img src="./images/elbrus_2.jpg" alt="Гора Эльбрус" class="element__image">
           <p class="element__text">Гора Эльбрус</p>
-          <div class="element__like"></div>
+          <button type="button" class="element__like"></button>
         </div>
         <div class="element">
           <img src="./images/dombay_2.jpg" alt="Домбай" class="element__image">
           <p class="element__text">Домбай</p>
-          <div class="element__like"></div>
+          <button type="button" class="element__like"></button>
         </div>
         <div class="element">
           <img src="./images/karach_1.jpg" alt="Карачаево-Черкессия" class="element__image">
           <p class="element__text">Карачаево-Черкессия</p>
-          <div class="element__like"></div>
+          <button type="button" class="element__like"></button>
         </div>
       </section>
     </main>
@@ -66,12 +65,12 @@
 
     <div class="popup">
       <div class="popup__container">
-        <form class="form" action="none">
+        <form class="form" name="editform" action="none">
           <h2 class="form__heading">Редактировать профиль</h2>
-          <input type="text" class="form__name" value="Жак-Ив Кусто">
-          <input type="text" class="form__profession" value="Исследователь океана">
+          <input type="text" class="form__input" value="Жак-Ив Кусто">
+          <input type="text" class="form__input form__input_profession" value="Исследователь океана">
           <input type="submit" class="form__submit" value="Сохранить">
-          <button class="popup__close">
+          <button type="button" class="popup__close">
             <img src="./images/Close_Icon.png" alt="закрыть" class="popup__cross">
           </button>
         </form>

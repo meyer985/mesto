@@ -6,6 +6,7 @@
   background-repeat: no-repeat;
   align-self: center;
   justify-self: center;
+  border: none;
   transition: .3s;
 }
 

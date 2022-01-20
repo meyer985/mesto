@@ -7,6 +7,8 @@
   font-size: 18px;
   line-height: 1.2;
   transition: .3s;
+  border:none;
+  border-radius: 2px;
 }
 
 .form__submit:hover {
