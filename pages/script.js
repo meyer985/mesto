@@ -96,4 +96,16 @@ function closeAddPopup() {
 
 closeAddButton.addEventListener('click', closeAddPopup);
 
+function addCardsHandler(evt) {
+  evt.preventDefault();
+  const newCard = cardElement.cloneNode(true);
+  newCard.querySelector('.element__text').innerText = newCardName.value;
+  newCard.querySelector('.element__image').src = newPictureUrl.value;
+  elementsList.prepend(newCard);
+  closeAddPopup();
+}
+
+const submitNewCard = popupAdd.querySelector('.form__submit_type_add');
+submitNewCard.addEventListener('click', addCardsHandler);
+
 render();
