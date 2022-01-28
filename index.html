@@ -19,43 +19,17 @@
         <div class="profile__avatar"></div>
         <div class="profile__info info">
           <h1 class="info__name">Жак-Ив Кусто</h1>
-          <button type="button" class="info__edit"><img class="info__pen" src="./images/edit.png" alt="редактировать"></button>
+          <button type="button" class="info__edit"><img class="info__pen" src="./images/edit.png"
+              alt="редактировать"></button>
           <p class="info__profession">Исследователь океана</p>
         </div>
         <button type="button" class="profile__addbutton"></button>
       </section>
 
       <section class="elements">
-        <div class="element">
-          <img src="./images/karachay_2.jpg" alt="Карачаевск" class="element__image">
-          <p class="element__text">Карачаевск</p>
-          <button type="button" class="element__like"></button>
-        </div>
-        <div class="element">
-          <img src="./images/elbrus_1.jpg" alt="Гора Эльбрус" class="element__image">
-          <p class="element__text">Гора Эльбрус</p>
-          <button type="button" class="element__like"></button>
-        </div>
-        <div class="element">
-          <img src="./images/dombay_1.jpg" alt="Домбай" class="element__image">
-          <p class="element__text">Домбай</p>
-          <button type="button" class="element__like"></button>
-        </div>
-        <div class="element">
-          <img src="./images/elbrus_2.jpg" alt="Гора Эльбрус" class="element__image">
-          <p class="element__text">Гора Эльбрус</p>
-          <button type="button" class="element__like"></button>
-        </div>
-        <div class="element">
-          <img src="./images/dombay_2.jpg" alt="Домбай" class="element__image">
-          <p class="element__text">Домбай</p>
-          <button type="button" class="element__like"></button>
-        </div>
-        <div class="element">
-          <img src="./images/karach_1.jpg" alt="Карачаево-Черкессия" class="element__image">
-          <p class="element__text">Карачаево-Черкессия</p>
-          <button type="button" class="element__like"></button>
-        </div>
+        <ul class="elements__list">
+
+        </ul>
       </section>
     </main>
 
@@ -63,19 +37,41 @@
       <p class="footer__text">&COPY; 2020 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup popup_type_edit">
       <div class="popup__container">
         <form class="form" name="editform" action="none">
           <h2 class="form__heading">Редактировать профиль</h2>
           <input type="text" class="form__input" value="Жак-Ив Кусто">
           <input type="text" class="form__input form__input_type_profession" value="Исследователь океана">
           <input type="submit" class="form__submit" value="Сохранить">
-          <button type="button" class="popup__close">
+          <button type="button" class="popup__close popup__close_type_edit">
             <img src="./images/Close_Icon.png" alt="закрыть" class="popup__cross">
           </button>
         </form>
       </div>
     </div>
+
+    <div class="popup popup_type_add-item">
+      <div class="popup__container">
+        <form class="form" name="add-form" action="none">
+          <h2 class="form__heading">Новое место</h2>
+          <input type="text" class="form__input form__input_add-item" value="" placeholder="Название">
+          <input type="text" class="form__input form__input_type_profession form__input_type_url" value="" placeholder="Ссылка на картинку">
+          <input type="submit" class="form__submit" value="Создать">
+          <button type="button" class="popup__close popup__close_type_add">
+            <img src="./images/Close_Icon.png" alt="закрыть" class="popup__cross">
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <template class="template-card">
+      <li class="element">
+        <img src="тест" alt="Карачаевск" class="element__image">
+        <p class="element__text">Тест</p>
+        <button type="button" class="element__like"></button>
+      </li>
+    </template>
 
   </div>
   <script src="./pages/script.js"></script>
