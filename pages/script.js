@@ -73,6 +73,8 @@ function renderItem(item) { // ф-ция добавления карточки
   const newCard = cardElement.cloneNode(true);
   newCard.querySelector('.element__text').innerText = item.name;
   newCard.querySelector('.element__image').src = item.link;
+  newCard.querySelector('.element__like').addEventListener('click', likeActive); //обработчик лайка
+
   elementsList.append(newCard);
 }
 
@@ -101,11 +103,22 @@ function addCardsHandler(evt) {
   const newCard = cardElement.cloneNode(true);
   newCard.querySelector('.element__text').innerText = newCardName.value;
   newCard.querySelector('.element__image').src = newPictureUrl.value;
+
+  newCard.querySelector('.element__like').addEventListener('click', likeActive); //обработчик лайка
   elementsList.prepend(newCard);
+
   closeAddPopup();
 }
 
 const submitNewCard = popupAdd.querySelector('.form__submit_type_add');
 submitNewCard.addEventListener('click', addCardsHandler);
 
+//Функция лайк
+
+function likeActive(event) {
+  //console.log(event.target);
+  event.target.classList.toggle('element__like_active');
+}
+
 render();
+
