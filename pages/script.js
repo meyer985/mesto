@@ -74,6 +74,7 @@ function renderItem(item) { // ф-ция добавления карточки
   newCard.querySelector('.element__text').innerText = item.name;
   newCard.querySelector('.element__image').src = item.link;
   newCard.querySelector('.element__like').addEventListener('click', likeActive); //обработчик лайка
+  newCard.querySelector('.element__delite').addEventListener('click', deliteCard); //обработчик делита
 
   elementsList.append(newCard);
 }
@@ -105,6 +106,9 @@ function addCardsHandler(evt) {
   newCard.querySelector('.element__image').src = newPictureUrl.value;
 
   newCard.querySelector('.element__like').addEventListener('click', likeActive); //обработчик лайка
+  newCard.querySelector('.element__delite').addEventListener('click', deliteCard); //обработчик делита
+
+
   elementsList.prepend(newCard);
 
   closeAddPopup();
@@ -119,6 +123,14 @@ function likeActive(event) {
   //console.log(event.target);
   event.target.classList.toggle('element__like_active');
 }
+
+// Функция DELETE
+
+function deliteCard(event) {
+  event.target.closest('.element').remove();
+}
+
+
 
 render();
 
