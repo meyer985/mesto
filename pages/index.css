@@ -29,7 +29,6 @@
 @import url(../blocks/form/__input/_type/form__input_type_profession.css);
 @import url(../blocks/form/__submit/form__submit.css);
 @import url(../blocks/popup/__close/popup__close.css);
-@import url(../blocks/popup/__close/_type/popup__close_type_picture.css);
 @import url(../blocks/popup/__cross/popup.__cross.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__image-container/popup__image-container.css);

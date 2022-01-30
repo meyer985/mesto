@@ -25,15 +25,15 @@ const initialCards = [
   }
 ];
 
-let editButton = document.querySelector('.info__edit');
-let closeEditButton = document.querySelector('.popup__close_type_edit');
-let popupEdit = document.querySelector('.popup_type_edit');
-let formElement = document.querySelector('.form');
-let nameInput = formElement.querySelector('.form__input');
-let jobInput = formElement.querySelector('.form__input_type_profession');
-let info = document.querySelector('.info');
-let infoName = info.querySelector('.info__name');
-let infoProfession = info.querySelector('.info__profession');
+const editButton = document.querySelector('.info__edit');
+const closeEditButton = document.querySelector('.popup__close_type_edit');
+const popupEdit = document.querySelector('.popup_type_edit');
+const formElement = document.querySelector('.form');
+const nameInput = formElement.querySelector('.form__input');
+const jobInput = formElement.querySelector('.form__input_type_profession');
+const info = document.querySelector('.info');
+const infoName = info.querySelector('.info__name');
+const infoProfession = info.querySelector('.info__profession');
 
 const elementsList = document.querySelector('.elements__list'); //контейнер д карточек
 const cardElement = document.querySelector('.template-card').content // темплейт li
@@ -73,8 +73,9 @@ function renderItem(item) { // ф-ция добавления карточки
   const newCard = cardElement.cloneNode(true);
   newCard.querySelector('.element__text').innerText = item.name;
   newCard.querySelector('.element__image').src = item.link;
-  newCard.querySelector('.element__like').addEventListener('click', likeActive); //обработчик лайка
-  newCard.querySelector('.element__delite').addEventListener('click', deliteCard); //обработчик делита
+  newCard.querySelector('.element__like').addEventListener('click', likeActive); //слушатель лайка
+  newCard.querySelector('.element__delite').addEventListener('click', deliteCard); //слушатель делита
+  newCard.querySelector('.element__image').addEventListener('click', openViewScreen); //слушатель открытия просмотра
 
   elementsList.append(newCard);
 }
@@ -105,8 +106,9 @@ function addCardsHandler(evt) {
   newCard.querySelector('.element__text').innerText = newCardName.value;
   newCard.querySelector('.element__image').src = newPictureUrl.value;
 
-  newCard.querySelector('.element__like').addEventListener('click', likeActive); //обработчик лайка
-  newCard.querySelector('.element__delite').addEventListener('click', deliteCard); //обработчик делита
+  newCard.querySelector('.element__like').addEventListener('click', likeActive); //слушатель лайка
+  newCard.querySelector('.element__delite').addEventListener('click', deliteCard); //слушатель делита
+  newCard.querySelector('.element__image').addEventListener('click', openViewScreen); //слушатель открытия просмотра
 
   elementsList.prepend(newCard);
 
@@ -127,6 +129,25 @@ function likeActive(event) {
 
 function deliteCard(event) {
   event.target.closest('.element').remove();
+}
+
+// Попап просмотра картинок
+
+const viewWindow = document.querySelector('.popup_type_picture'); //окно просмотра картинок
+const viewPicture = viewWindow.querySelector('.popup__picture'); //картинка
+const viewCaption = viewWindow.querySelector('.popup__caption'); //подпись
+const viewClosing = viewWindow.querySelector('.popup__close'); // кнопка закр
+
+function openViewScreen(event) {
+  viewWindow.classList.add('popup_opened');
+  viewPicture.src = event.target.src;
+  viewCaption.innerText = event.target.nextElementSibling.textContent;
+}
+
+viewClosing.addEventListener('click', closeViewScreen);
+
+function closeViewScreen() {
+  viewWindow.classList.remove('popup_opened');
 }
 
 render();
