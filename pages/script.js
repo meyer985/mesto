@@ -100,17 +100,18 @@ function closeAddPopup() {
 
 closeAddButton.addEventListener('click', closeAddPopup);
 
+// добавление карточек
 function addCardsHandler(evt) {
   evt.preventDefault();
-  const newCard = cardElement.cloneNode(true);
-  newCard.querySelector('.element__text').innerText = newCardName.value;
-  newCard.querySelector('.element__image').src = newPictureUrl.value;
+  const addCard = cardElement.cloneNode(true);
+  addCard.querySelector('.element__text').innerText = newCardName.value;
+  addCard.querySelector('.element__image').src = newPictureUrl.value;
 
-  newCard.querySelector('.element__like').addEventListener('click', likeActive); //слушатель лайка
-  newCard.querySelector('.element__delite').addEventListener('click', deliteCard); //слушатель делита
-  newCard.querySelector('.element__image').addEventListener('click', openViewScreen); //слушатель открытия просмотра
+  addCard.querySelector('.element__like').addEventListener('click', likeActive); //слушатель лайка
+  addCard.querySelector('.element__delite').addEventListener('click', deliteCard); //слушатель делита
+  addCard.querySelector('.element__image').addEventListener('click', openViewScreen); //слушатель открытия просмотра
 
-  elementsList.prepend(newCard);
+  elementsList.prepend(addCard);
 
   closeAddPopup();
 }
@@ -121,7 +122,6 @@ submitNewCard.addEventListener('click', addCardsHandler);
 //Функция лайк
 
 function likeActive(event) {
-  //console.log(event.target);
   event.target.classList.toggle('element__like_active');
 }
 
