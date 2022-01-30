@@ -108,7 +108,6 @@ function addCardsHandler(evt) {
   newCard.querySelector('.element__like').addEventListener('click', likeActive); //обработчик лайка
   newCard.querySelector('.element__delite').addEventListener('click', deliteCard); //обработчик делита
 
-
   elementsList.prepend(newCard);
 
   closeAddPopup();
@@ -129,8 +128,6 @@ function likeActive(event) {
 function deliteCard(event) {
   event.target.closest('.element').remove();
 }
-
-
 
 render();
 
