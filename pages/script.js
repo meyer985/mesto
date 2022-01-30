@@ -120,19 +120,16 @@ const submitNewCard = popupAdd.querySelector('.form__submit_type_add');
 submitNewCard.addEventListener('click', addCardsHandler);
 
 //Функция лайк
-
 function likeActive(event) {
   event.target.classList.toggle('element__like_active');
 }
 
 // Функция DELETE
-
 function deliteCard(event) {
   event.target.closest('.element').remove();
 }
 
-// Попап просмотра картинок
-
+// Поп-ап просмотра картинок
 const viewWindow = document.querySelector('.popup_type_picture'); //окно просмотра картинок
 const viewPicture = viewWindow.querySelector('.popup__picture'); //картинка
 const viewCaption = viewWindow.querySelector('.popup__caption'); //подпись
