@@ -67,7 +67,6 @@ profileForm.addEventListener('submit', handleProfileFormSubmit); //слушат�
 //Добавление карточек из массива
 const elementsList = document.querySelector('.elements__list'); //контейнер д карточек
 const cardElement = document.querySelector('.template-card').content // темплейт li
-const cardImage = cardElement.querySelector('.element__image');
 
 function createCard() { //отдельная функция создания карточки
   const newCard = cardElement.cloneNode(true);
@@ -90,14 +89,14 @@ function renderItem(item) { // ф-ция добавления карточки �
 }
 
 //Добавление карточек через форму
-const popupAdd = document.querySelector('.popup_type_add-item'); // попап доб карточки
-const newCardName = popupAdd.querySelector('.form__input_add-item');
-const newPictureUrl = popupAdd.querySelector('.form__input_type_url');
+const popupAddCard = document.querySelector('.popup_type_add-item'); // попап доб карточки
+const newCardName = popupAddCard.querySelector('.form__input_add-item');
+const newPictureUrl = popupAddCard.querySelector('.form__input_type_url');
 const addButton = document.querySelector('.profile__addbutton'); // кнопка добав карточек
 const closeAddButton = document.querySelector('.popup__close_type_add');
 
-addButton.addEventListener('click', () => openPopup(popupAdd));
-closeAddButton.addEventListener('click', () => closePopup(popupAdd));
+addButton.addEventListener('click', () => openPopup(popupAddCard));
+closeAddButton.addEventListener('click', () => closePopup(popupAddCard));
 
 // добавление карточек
 function handleAddCardForm(evt) {
@@ -105,16 +104,17 @@ function handleAddCardForm(evt) {
   const newCard = createCard();
   newCard.querySelector('.element__text').innerText = newCardName.value;
   newCard.querySelector('.element__image').src = newPictureUrl.value;
+  newCard.querySelector('.element__image').alt = newCardName.value;
 
   elementsList.prepend(newCard);
   newCardName.value = '';
   newPictureUrl.value = '';
 
-  closePopup(popupAdd);
+  closePopup(popupAddCard);
 }
 
-const submitNewCard = popupAdd.querySelector('.form_type_add-card');
-submitNewCard.addEventListener('submit', handleAddCardForm);
+const newCardSubmitForm = popupAddCard.querySelector('.form_type_add-card');
+newCardSubmitForm.addEventListener('submit', handleAddCardForm);
 
 //Функция лайк
 function toggleLike(event) {
@@ -139,11 +139,7 @@ function openViewScreen(event) {
   viewCaption.innerText = event.target.nextElementSibling.textContent;
 }
 
-viewClosing.addEventListener('click', closeViewScreen);
-
-function closeViewScreen() {
-  viewWindow.classList.remove('popup_opened');
-}
+viewClosing.addEventListener('click', () => closePopup(viewWindow));
 
 render();
 
