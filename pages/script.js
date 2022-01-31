@@ -96,38 +96,25 @@ const newPictureUrl = popupAdd.querySelector('.form__input_type_url');
 const addButton = document.querySelector('.profile__addbutton'); // кнопка добав карточек
 const closeAddButton = document.querySelector('.popup__close_type_add');
 
-function openAddPopup() {
-  popupAdd.classList.add('popup_opened');
-  newCardName.value = '';
-  newPictureUrl.value = '';
-}
-
-addButton.addEventListener('click', openAddPopup);
-
-function closeAddPopup() {
-  popupAdd.classList.remove('popup_opened');
-}
-
-closeAddButton.addEventListener('click', closeAddPopup);
+addButton.addEventListener('click', () => openPopup(popupAdd));
+closeAddButton.addEventListener('click', () => closePopup(popupAdd));
 
 // добавление карточек
-function addCardsHandler(evt) {
+function handleAddCardForm(evt) {
   evt.preventDefault();
-  const addCard = cardElement.cloneNode(true);
-  addCard.querySelector('.element__text').innerText = newCardName.value;
-  addCard.querySelector('.element__image').src = newPictureUrl.value;
+  const newCard = createCard();
+  newCard.querySelector('.element__text').innerText = newCardName.value;
+  newCard.querySelector('.element__image').src = newPictureUrl.value;
 
-  addCard.querySelector('.element__like').addEventListener('click', toggleLike); //слушатель лайка
-  addCard.querySelector('.element__delite').addEventListener('click', deliteCard); //слушатель делита
-  addCard.querySelector('.element__image').addEventListener('click', openViewScreen); //слушатель открытия просмотра
+  elementsList.prepend(newCard);
+  newCardName.value = '';
+  newPictureUrl.value = '';
 
-  elementsList.prepend(addCard);
-
-  closeAddPopup();
+  closePopup(popupAdd);
 }
 
-const submitNewCard = popupAdd.querySelector('.form__submit_type_add');
-submitNewCard.addEventListener('click', addCardsHandler);
+const submitNewCard = popupAdd.querySelector('.form_type_add-card');
+submitNewCard.addEventListener('submit', handleAddCardForm);
 
 //Функция лайк
 function toggleLike(event) {
@@ -146,8 +133,9 @@ const viewCaption = viewWindow.querySelector('.popup__caption'); //подпис�
 const viewClosing = viewWindow.querySelector('.popup__close'); // кнопка закр
 
 function openViewScreen(event) {
-  viewWindow.classList.add('popup_opened');
+  openPopup(viewWindow);
   viewPicture.src = event.target.src;
+  viewPicture.alt = event.target.nextElementSibling.textContent;
   viewCaption.innerText = event.target.nextElementSibling.textContent;
 }
 
