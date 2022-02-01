@@ -37,7 +37,7 @@ const infoProfession = info.querySelector('.info__profession');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-}
+  }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -68,11 +68,15 @@ profileForm.addEventListener('submit', handleProfileFormSubmit); //слушат�
 const elementsList = document.querySelector('.elements__list'); //контейнер д карточек
 const cardElement = document.querySelector('.template-card').content // темплейт li
 
-function createCard() { //отдельная функция создания карточки
+function createCard(name, link) { //отдельная функция создания карточки
   const newCard = cardElement.cloneNode(true);
+  const cardImage = newCard.querySelector('.element__image');
   newCard.querySelector('.element__like').addEventListener('click', toggleLike); //слушатель лайка
   newCard.querySelector('.element__delite').addEventListener('click', deliteCard); //слушатель делита
-  newCard.querySelector('.element__image').addEventListener('click', openViewScreen); //слушатель открытия просмотра
+  cardImage.addEventListener('click', openViewScreen); //слушатель открытия просмотра
+  newCard.querySelector('.element__text').innerText = name;
+  cardImage.src = link;
+  cardImage.alt = name;
   return newCard;
 }
 
@@ -81,10 +85,7 @@ function render() {
 }
 
 function renderItem(item) { // ф-ция добавления карточки из массива
-  const newCard = createCard();
-  newCard.querySelector('.element__text').innerText = item.name;
-  newCard.querySelector('.element__image').src = item.link;
-  newCard.querySelector('.element__image').alt = item.name;
+  const newCard = createCard(item.name, item.link);
   elementsList.append(newCard);
 }
 
@@ -101,15 +102,10 @@ closeAddButton.addEventListener('click', () => closePopup(popupAddCard));
 // добавление карточек
 function handleAddCardForm(evt) {
   evt.preventDefault();
-  const newCard = createCard();
-  newCard.querySelector('.element__text').innerText = newCardName.value;
-  newCard.querySelector('.element__image').src = newPictureUrl.value;
-  newCard.querySelector('.element__image').alt = newCardName.value;
-
+  const newCard = createCard(newCardName.value, newPictureUrl.value);
   elementsList.prepend(newCard);
   newCardName.value = '';
   newPictureUrl.value = '';
-
   closePopup(popupAddCard);
 }
 
@@ -135,8 +131,8 @@ const viewClosing = viewWindow.querySelector('.popup__close'); // кнопка �
 function openViewScreen(event) {
   openPopup(viewWindow);
   viewPicture.src = event.target.src;
-  viewPicture.alt = event.target.nextElementSibling.textContent;
-  viewCaption.innerText = event.target.nextElementSibling.textContent;
+  viewPicture.alt = event.target.alt;
+  viewCaption.innerText = event.target.alt;
 }
 
 viewClosing.addEventListener('click', () => closePopup(viewWindow));
