@@ -26,7 +26,6 @@ const initialCards = [
 ];
 
 const editButton = document.querySelector('.info__edit');
-const closeEditButton = document.querySelector('.popup__close_type_edit');
 const popupEdit = document.querySelector('.popup_type_edit');
 const profileForm = document.querySelector('.form');
 const nameInput = profileForm.querySelector('.form__input');
@@ -37,7 +36,13 @@ const infoProfession = info.querySelector('.info__profession');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+}
+
+function closePopupHandler(evt, popup) {
+   if (evt.target.classList.contains('popup__close') || evt.target.classList.contains('popup__cross') || evt.target.classList.contains('popup') || evt.key === 'Escape') {
+    closePopup(popup);
   }
+}
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -50,7 +55,8 @@ function openEditPopup() {
 }
 
 editButton.addEventListener('click', openEditPopup);
-closeEditButton.addEventListener('click', () => closePopup(popupEdit));
+popupEdit.addEventListener('click', (evt) => closePopupHandler(evt, popupEdit));
+document.addEventListener('keydown', (evt) => closePopupHandler(evt, popupEdit));
 
 //Обработчик сабмита формы редактирования
 function handleProfileFormSubmit(evt) {
@@ -94,10 +100,10 @@ const popupAddCard = document.querySelector('.popup_type_add-item'); // попа
 const newCardName = popupAddCard.querySelector('.form__input_add-item');
 const newPictureUrl = popupAddCard.querySelector('.form__input_type_url');
 const addButton = document.querySelector('.profile__addbutton'); // кнопка добав карточек
-const closeAddButton = document.querySelector('.popup__close_type_add');
 
 addButton.addEventListener('click', () => openPopup(popupAddCard));
-closeAddButton.addEventListener('click', () => closePopup(popupAddCard));
+popupAddCard.addEventListener('click', (evt) => closePopupHandler(evt, popupAddCard));
+document.addEventListener('keydown', (evt) => closePopupHandler(evt, popupAddCard));
 
 // добавление карточек
 function handleAddCardForm(evt) {
@@ -126,7 +132,6 @@ function deliteCard(event) {
 const viewWindow = document.querySelector('.popup_type_picture'); //окно просмотра картинок
 const viewPicture = viewWindow.querySelector('.popup__picture'); //картинка
 const viewCaption = viewWindow.querySelector('.popup__caption'); //подпись
-const viewClosing = viewWindow.querySelector('.popup__close'); // кнопка закр
 
 function openViewScreen(event) {
   openPopup(viewWindow);
@@ -135,7 +140,8 @@ function openViewScreen(event) {
   viewCaption.innerText = event.target.alt;
 }
 
-viewClosing.addEventListener('click', () => closePopup(viewWindow));
+viewWindow.addEventListener('click', (evt) => closePopupHandler(evt, viewWindow));
+document.addEventListener('keydown', (evt) => closePopupHandler(evt, viewWindow));
 
 render();
 
