@@ -36,9 +36,20 @@ const infoProfession = info.querySelector('.info__profession');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', (evt) => closePopupHandler(evt, popup));
+  document.addEventListener('keydown', setListener = function (evt) {
+    closePopupHandler(evt, popup);
+  });
 
+  enableValidation({
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__submit',
+    inactiveButtonClass: 'form__submit_inactive',
+    inputErrorClass: '.form__error-message_',
+    errorClass: 'form__input_type_error'
+  });
 }
+
 
 function closePopupHandler(evt, popup) {
    if (evt.target.classList.contains('popup__close') || evt.target.classList.contains('popup__cross') || evt.target.classList.contains('popup') || evt.key === 'Escape') {
@@ -48,8 +59,8 @@ function closePopupHandler(evt, popup) {
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', (evt) => closePopupHandler(evt, popup));
-}
+  document.removeEventListener('keydown', setListener);
+  }
 
 function openEditPopup() {
   openPopup(popupEdit);
