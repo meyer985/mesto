@@ -27,7 +27,10 @@
 @import url(../blocks/form/__heading/form__heading.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__input/_type/form__input_type_profession.css);
+@import url(../blocks/form/__input/_type/form__input_type_error.css);
 @import url(../blocks/form/__submit/form__submit.css);
+@import url(../blocks/form/__submit/_inactive/form__submit_inactive.css);
+@import url(../blocks/form/__error-message/form__error-message.css);
 @import url(../blocks/popup/__close/popup__close.css);
 @import url(../blocks/popup/__cross/popup.__cross.css);
 @import url(../blocks/popup/_opened/popup_opened.css);

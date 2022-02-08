@@ -36,6 +36,8 @@ const infoProfession = info.querySelector('.info__profession');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', (evt) => closePopupHandler(evt, popup));
+
 }
 
 function closePopupHandler(evt, popup) {
@@ -46,17 +48,15 @@ function closePopupHandler(evt, popup) {
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', (evt) => closePopupHandler(evt, popup));
 }
 
 function openEditPopup() {
   openPopup(popupEdit);
-  nameInput.value = infoName.textContent;
-  jobInput.value = infoProfession.textContent;
-}
+  }
 
 editButton.addEventListener('click', openEditPopup);
 popupEdit.addEventListener('click', (evt) => closePopupHandler(evt, popupEdit));
-document.addEventListener('keydown', (evt) => closePopupHandler(evt, popupEdit));
 
 //Обработчик сабмита формы редактирования
 function handleProfileFormSubmit(evt) {
@@ -103,7 +103,6 @@ const addButton = document.querySelector('.profile__addbutton'); // кнопка
 
 addButton.addEventListener('click', () => openPopup(popupAddCard));
 popupAddCard.addEventListener('click', (evt) => closePopupHandler(evt, popupAddCard));
-document.addEventListener('keydown', (evt) => closePopupHandler(evt, popupAddCard));
 
 // добавление карточек
 function handleAddCardForm(evt) {
@@ -141,7 +140,6 @@ function openViewScreen(event) {
 }
 
 viewWindow.addEventListener('click', (evt) => closePopupHandler(evt, viewWindow));
-document.addEventListener('keydown', (evt) => closePopupHandler(evt, viewWindow));
 
 render();
 
