@@ -37,10 +37,12 @@
 
     <div class="popup popup_type_edit">
       <div class="popup__container">
-        <form class="form" name="editform" action="none">
+        <form class="form" name="editform" action="none" novalidate>
           <h2 class="form__heading">Редактировать профиль</h2>
-          <input type="text" class="form__input" value="Жак-Ив Кусто">
-          <input type="text" class="form__input form__input_type_profession" value="Исследователь океана">
+          <input type="text" class="form__input" id="input-name"placeholder="Имя" value="Жак-Ив Кусто" minlength="2" maxlength="40" required>
+          <span class="form__error-message form__error-message_input-name"></span>
+          <input type="text" class="form__input form__input_type_profession" id="input-about" placeholder="О себе" value="Исследователь океана" minlength="2" maxlength="200" required>
+          <span class="form__error-message form__error-message_input-about"></span>
           <input type="submit" class="form__submit" value="Сохранить">
           <button type="button" class="popup__close popup__close_type_edit">
             <img src="./images/Close_Icon.png" alt="закрыть" class="popup__cross">
@@ -51,11 +53,12 @@
 
     <div class="popup popup_type_add-item">
       <div class="popup__container">
-        <form class="form form_type_add-card" name="add-form" action="none">
+        <form class="form form_type_add-card" name="add-form" action="none" novalidate>
           <h2 class="form__heading">Новое место</h2>
-          <input type="text" class="form__input form__input_add-item" value="" placeholder="Название">
-          <input type="text" class="form__input form__input_type_profession form__input_type_url" value=""
-            placeholder="Ссылка на картинку">
+          <input type="text" class="form__input form__input_add-item" id="input-new-item" value="" placeholder="Название" minlength="2" maxlength="30" required>
+          <span class="form__error-message form__error-message_input-new-item"></span>
+          <input type="url" class="form__input form__input_type_profession form__input_type_url" id="input-url" value="" placeholder="Ссылка на картинку" required>
+          <span class="form__error-message form__error-message_input-url"></span>
           <input type="submit" class="form__submit form__submit_type_add" value="Создать">
           <button type="button" class="popup__close popup__close_type_add">
             <img src="./images/Close_Icon.png" alt="закрыть" class="popup__cross">
@@ -85,6 +88,8 @@
 
   </div>
   <script src="./pages/script.js"></script>
+  <script src="./pages/validation.js"></script>
+
 </body>
 
 </html>
