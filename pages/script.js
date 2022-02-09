@@ -39,6 +39,7 @@ function openPopup(popup) {
   document.addEventListener('keydown', setListener = function (evt) {
     closePopupHandler(evt, popup);
   });
+<<<<<<< HEAD
 
   enableValidation({
     formSelector: '.form',
@@ -48,6 +49,8 @@ function openPopup(popup) {
     inputErrorClass: '.form__error-message_',
     errorClass: 'form__input_type_error'
   });
+=======
+>>>>>>> c9c9817ebf1a45bde5e1b6127ddefc67fa5b6955
 }
 
 
