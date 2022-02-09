@@ -34,40 +34,37 @@ const info = document.querySelector('.info');
 const infoName = info.querySelector('.info__name');
 const infoProfession = info.querySelector('.info__profession');
 
+function closeByEsc(event) {
+  if (event.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+    closePopup(openedPopup);
+  }
+}
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', setListener = function (evt) {
-    closePopupHandler(evt, popup);
-  });
-
-  enableValidation({
-    formSelector: '.form',
-    inputSelector: '.form__input',
-    submitButtonSelector: '.form__submit',
-    inactiveButtonClass: 'form__submit_inactive',
-    inputErrorClass: '.form__error-message_',
-    errorClass: 'form__input_type_error'
-  });
+  document.addEventListener('keydown', closeByEsc);
 }
 
-
-function closePopupHandler(evt, popup) {
-   if (evt.target.classList.contains('popup__close') || evt.target.classList.contains('popup__cross') || evt.target.classList.contains('popup') || evt.key === 'Escape') {
-    closePopup(popup);
-  }
-}
+const popups = Array.from(document.querySelectorAll('.popup'));
+popups.forEach((popup) => {
+  popup.addEventListener('click', (evt) => {
+    if (evt.target.classList.contains('popup_opened') || evt.target.classList.contains('popup__close') || evt.target.classList.contains('popup__cross')) {
+      closePopup(popup);
+    }
+  })
+})
 
 function closePopup(popup) {
+  document.removeEventListener('keydown', closeByEsc);
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', setListener);
-  }
+}
 
 function openEditPopup() {
   openPopup(popupEdit);
-  }
+}
 
 editButton.addEventListener('click', openEditPopup);
-popupEdit.addEventListener('click', (evt) => closePopupHandler(evt, popupEdit));
 
 //Обработчик сабмита формы редактирования
 function handleProfileFormSubmit(evt) {
@@ -113,7 +110,6 @@ const newPictureUrl = popupAddCard.querySelector('.form__input_type_url');
 const addButton = document.querySelector('.profile__addbutton'); // кнопка добав карточек
 
 addButton.addEventListener('click', () => openPopup(popupAddCard));
-popupAddCard.addEventListener('click', (evt) => closePopupHandler(evt, popupAddCard));
 
 // добавление карточек
 function handleAddCardForm(evt) {
@@ -122,6 +118,9 @@ function handleAddCardForm(evt) {
   elementsList.prepend(newCard);
   newCardName.value = '';
   newPictureUrl.value = '';
+  const submitButton = evt.target.querySelector('.form__submit');
+  submitButton.classList.add('form__submit_inactive');
+  submitButton.setAttribute('disabled', 'disabled');
   closePopup(popupAddCard);
 }
 
@@ -150,7 +149,4 @@ function openViewScreen(event) {
   viewCaption.innerText = event.target.alt;
 }
 
-viewWindow.addEventListener('click', (evt) => closePopupHandler(evt, viewWindow));
-
 render();
-
