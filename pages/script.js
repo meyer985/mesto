@@ -1,6 +1,6 @@
-import { FormValidator } from "./FormValidator.js";
-import { Card } from "./Card.js";
-import { openPopup, closePopup } from "./utils.js";
+import { FormValidator } from "./components/FormValidator.js";
+import { Card } from "./components/Card.js";
+import { openPopup, closePopup } from "./utils/utils.js";
 
 const initialCards = [
   {
@@ -89,35 +89,40 @@ function render() {
   initialCards.forEach(renderItem); //ф-ция вызова ф-ции renderItem на изнач массив
 }
 
+function createCard(item, template) {
+  const newCard = new Card(item, template);
+  return newCard.createCard();
+}
+
 function renderItem(item) {
   // ф-ция добавления карточки из массива
-  const newCard = new Card(item, ".template-card");
-  elementsList.append(newCard.createCard());
+  elementsList.append(createCard(item, ".template-card"));
 }
 
 //Добавление карточек через форму
 const popupAddCard = document.querySelector(".popup_type_add-item"); // попап доб карточки
 const newCardName = popupAddCard.querySelector(".form__input_add-item");
 const newPictureUrl = popupAddCard.querySelector(".form__input_type_url");
-console.log(newCardName.value);
 
 const addButton = document.querySelector(".profile__addbutton"); // кнопка добав карточек
 
-addButton.addEventListener("click", () => openPopup(popupAddCard));
+addButton.addEventListener("click", () => {
+  openPopup(popupAddCard);
+  editAddCardValidator.resetValidation();
+});
 
 // добавление карточек
 function handleAddCardForm(evt) {
   evt.preventDefault();
-  const newCard = new Card(
-    { name: `${newCardName.value}`, link: `${newPictureUrl.value}` },
-    ".template-card"
+
+  elementsList.prepend(
+    createCard(
+      { name: `${newCardName.value}`, link: `${newPictureUrl.value}` },
+      ".template-card"
+    )
   );
-  elementsList.prepend(newCard.createCard());
   newCardName.value = "";
   newPictureUrl.value = "";
-  const submitButton = evt.target.querySelector(".form__submit");
-  submitButton.classList.add("form__submit_inactive");
-  submitButton.setAttribute("disabled", "disabled");
   closePopup(popupAddCard);
 }
 

@@ -1,4 +1,9 @@
-import { viewWindow, viewPicture, viewCaption, openPopup } from "./utils.js";
+import {
+  viewWindow,
+  viewPicture,
+  viewCaption,
+  openPopup,
+} from "../utils/utils.js";
 
 export class Card {
   constructor(data, templateSelector) {
