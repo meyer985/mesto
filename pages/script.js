@@ -1,6 +1,8 @@
 import { FormValidator } from "./components/FormValidator.js";
-import { Card } from "./components/Card.js";
+// import { Card } from "./components/Card.js";
 import { openPopup, closePopup } from "./utils/utils.js";
+import { Section } from "./components/Section.js";
+import { Card } from "./components/Card.js";
 
 const initialCards = [
   {
@@ -82,22 +84,19 @@ function handleProfileFormSubmit(evt) {
 
 profileForm.addEventListener("submit", handleProfileFormSubmit); //слушатель сабмита
 
-//Добавление карточек из массива
 const elementsList = document.querySelector(".elements__list"); //контейнер д карточек
 
-function render() {
-  initialCards.forEach(renderItem); //ф-ция вызова ф-ции renderItem на изнач массив
-}
-
-function createCard(item, template) {
-  const newCard = new Card(item, template);
-  return newCard.createCard();
-}
-
-function renderItem(item) {
-  // ф-ция добавления карточки из массива
-  elementsList.append(createCard(item, ".template-card"));
-}
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (element) => {
+      const newCard = new Card(element, ".template-card").createCard();
+      cardList.addItem(newCard);
+    },
+  },
+  elementsList
+);
+cardList.cardRenderer();
 
 //Добавление карточек через форму
 const popupAddCard = document.querySelector(".popup_type_add-item"); // попап доб карточки
@@ -111,16 +110,21 @@ addButton.addEventListener("click", () => {
   editAddCardValidator.resetValidation();
 });
 
-// добавление карточек
+function createCard(data, templateSelector) {
+  const card = new Card(data, templateSelector);
+  return card.createCard();
+}
+
+//добавление карточек
 function handleAddCardForm(evt) {
   evt.preventDefault();
 
-  elementsList.prepend(
-    createCard(
-      { name: `${newCardName.value}`, link: `${newPictureUrl.value}` },
-      ".template-card"
-    )
+  const newElement = createCard(
+    { name: `${newCardName.value}`, link: `${newPictureUrl.value}` },
+    ".template-card"
   );
+  elementsList.prepend(newElement);
+
   newCardName.value = "";
   newPictureUrl.value = "";
   closePopup(popupAddCard);
@@ -131,5 +135,3 @@ newCardSubmitForm.addEventListener("submit", handleAddCardForm);
 
 const editAddCardValidator = new FormValidator(config, newCardSubmitForm); //объект из класса
 editAddCardValidator.enableValidation(); // вызвали метод
-
-render();
