@@ -2,8 +2,9 @@ import {
   viewWindow,
   viewPicture,
   viewCaption,
-  openPopup,
+  // openPopup,
 } from "../utils/utils.js";
+import { PopupWithImage } from "./Popup.js";
 
 export class Card {
   constructor(data, templateSelector) {
@@ -49,9 +50,11 @@ export class Card {
   };
 
   _openViewScreen = (event) => {
-    openPopup(viewWindow);
-    viewPicture.src = this._data.link;
-    viewPicture.alt = this._data.name;
-    viewCaption.innerText = this._data.name;
+    const preview = new PopupWithImage(".popup_type_picture", {
+      link: this._data.link,
+      name: this._data.name,
+    });
+
+    preview.open();
   };
 }

@@ -2,7 +2,7 @@ export class FormValidator {
   constructor(data, formElement) {
     //data -список селекторов, второй - форма
     this._data = data;
-    this._formElement = formElement;
+    this._formElement = document.querySelector(formElement);
   }
 
   enableValidation() {
