@@ -1,15 +1,8 @@
-import {
-  viewWindow,
-  viewPicture,
-  viewCaption,
-  // openPopup,
-} from "../utils/utils.js";
-import { PopupWithImage } from "./Popup.js";
-
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._data = data;
     this._cardTemplate = document.querySelector(templateSelector).content;
+    this._handleCardClick = handleCardClick;
   }
 
   createCard() {
@@ -41,7 +34,7 @@ export class Card {
     this._cardImage.alt = this._data.name;
   }
 
-  _toggleLike = (event) => {
+  _toggleLike = () => {
     this._likeButton.classList.toggle("element__like_active");
   };
 
@@ -49,12 +42,8 @@ export class Card {
     event.target.closest(".element").remove();
   };
 
-  _openViewScreen = (event) => {
-    const preview = new PopupWithImage(".popup_type_picture", {
-      link: this._data.link,
-      name: this._data.name,
-    });
-
-    preview.open();
+  _openViewScreen = () => {
+    console.log("tut");
+    this._handleCardClick();
   };
 }

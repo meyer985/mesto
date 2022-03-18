@@ -1,5 +1,3 @@
-import { Card } from "./Card.js";
-
 export class Section {
   constructor({ items, renderer }, selector) {
     this._cardsDataArray = items; //массив данных для создания карточки
