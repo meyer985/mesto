@@ -1,3 +1,4 @@
+import "./index.css";
 import { FormValidator } from "./components/FormValidator.js";
 import { Section } from "./components/Section.js";
 import { Card } from "./components/Card.js";
@@ -9,10 +10,8 @@ import {
   config,
   editButton,
   addButton,
+  elementsList,
 } from "./utils/constants.js";
-
-//ОТРИСОВКА МАССИВА КАРТОЧЕК
-const elementsList = document.querySelector(".elements__list"); //контейнер д карточек
 
 const cardList = new Section(
   {
@@ -34,6 +33,7 @@ const cardList = new Section(
 cardList.cardRenderer();
 
 //ВАЛИДАЦИЯ
+
 //валидаци формы профиля пользователя
 const editProfileValidator = new FormValidator(config, ".form"); // объект
 editProfileValidator.enableValidation(); // вызываем метод

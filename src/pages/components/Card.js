@@ -43,7 +43,6 @@ export class Card {
   };
 
   _openViewScreen = () => {
-    console.log("tut");
     this._handleCardClick();
   };
 }

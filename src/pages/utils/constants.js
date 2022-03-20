@@ -36,3 +36,5 @@ export const config = {
 
 export const editButton = document.querySelector(".info__edit");
 export const addButton = document.querySelector(".profile__addbutton"); // кнопка добав карточек
+
+export const elementsList = document.querySelector(".elements__list"); //контейнер д карточек
