@@ -12,6 +12,6 @@ export class Section {
 
   addItem(element) {
     //метод добавки карточки
-    this._selector.append(element);
+    this._selector.prepend(element);
   }
 }
