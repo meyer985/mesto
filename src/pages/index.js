@@ -12,6 +12,7 @@ import {
   addButton,
   elementsList,
 } from "../utils/constants.js";
+import { api } from "../components/Api.js";
 
 //функция создания новой карточки
 function createCard(data, templateSelector) {
@@ -21,6 +22,7 @@ function createCard(data, templateSelector) {
   return card.createCard();
 }
 
+//Отрисовка классом Section
 const cardList = new Section(
   {
     items: initialCards,
@@ -44,9 +46,23 @@ const editAddCardValidator = new FormValidator(config, ".form_type_add-card"); /
 editAddCardValidator.enableValidation(); // вызвали метод
 
 const infoUpdate = new UserInfo({
+  //заюираем имя и проф со страницы
   //информация о пользователе
   name: ".info__name",
   about: ".info__profession",
+});
+
+function changeAvatar(data) {
+  //замена аватарки из {объекта пользователя}
+  document.querySelector(
+    ".profile__avatar"
+  ).style.backgroundImage = `url(${data.avatar})`;
+}
+
+api.getUserInfo().then((result) => {
+  //подставляем данные на страницу
+  infoUpdate.setUserInfo(result);
+  changeAvatar(result);
 });
 
 //ПОПАПЫ
