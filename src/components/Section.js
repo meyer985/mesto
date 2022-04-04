@@ -1,13 +1,11 @@
 export class Section {
-  constructor({ items, renderer }, selector) {
-    this._cardsDataArray = items; //массив данных для создания карточки
+  constructor(selector) {
     this._selector = selector; // куда вставлять
-    this._renderer = renderer; //коллбэк для мягкого связывания
   }
 
-  cardRenderer() {
+  cardRenderer({ items, renderer }) {
     //метод отрисовки
-    this._cardsDataArray.forEach((element) => this._renderer(element));
+    items.forEach((item) => renderer(item));
   }
 
   addItem(element) {

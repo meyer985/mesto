@@ -47,6 +47,25 @@ class Api {
       })
       .catch(() => console.log(res.status));
   }
+
+  postNewCard(data) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link,
+      }),
+    })
+      .then((res) => {
+        if (res.status) {
+          return res.json();
+        } else {
+          return Promise.reject(res.status);
+        }
+      })
+      .catch(() => console.log(res.status));
+  }
 }
 
 export const api = new Api({

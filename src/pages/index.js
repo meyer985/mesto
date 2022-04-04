@@ -21,19 +21,16 @@ function createCard(data, templateSelector) {
   return card.createCard();
 }
 
-//отрисовка загруженного массива
+const cardList = new Section(elementsList);
+
 api.getCards().then((res) => {
-  const cardList = new Section(
-    {
-      items: res,
-      renderer: (element) => {
-        const newCard = createCard(element, ".template-card");
-        cardList.addItem(newCard);
-      },
+  cardList.cardRenderer({
+    items: res,
+    renderer: (item) => {
+      const newCard = createCard(item, ".template-card");
+      cardList.addItem(newCard);
     },
-    elementsList
-  );
-  cardList.cardRenderer();
+  });
 });
 
 //ВАЛИДАЦИЯ
@@ -69,16 +66,6 @@ api.getUserInfo().then((result) => {
 //ПОПАПЫ
 
 //попап редактирования данных пользователя
-///////****************************************************************************** */
-//объект попапа редактирования
-// const editPopup = new PopupWithForm(".popup_type_edit", (dataFromInputs) => {
-// // 1.повесить фетч
-
-//   infoUpdate.setUserInfo(dataFromInputs); //это вызвать внутри фетча с его возвратом
-
-//   editPopup.close();
-// });
-//************************************************************************************* */
 
 const editPopup = new PopupWithForm(".popup_type_edit", (dataFromInputs) => {
   api.updateProfileInfo(dataFromInputs).then((res) => {
@@ -98,10 +85,22 @@ function openEditPopup() {
   editPopup.listOfInputs[1].value = userInfo.about;
 }
 
+// //Попап добавления карточки
+// const popupAddCard = new PopupWithForm(".popup_type_add-item", (formData) => {
+//   const newCard = createCard(formData, ".template-card");
+
+//   cardList.addItem(newCard);
+//   popupAddCard.close();
+//   console.log(formData);
+// });
+
 //Попап добавления карточки
+
 const popupAddCard = new PopupWithForm(".popup_type_add-item", (formData) => {
-  const newCard = createCard(formData, ".template-card");
-  cardList.addItem(newCard);
+  api.postNewCard(formData).then((res) => {
+    const newCard = createCard(res, ".template-card");
+    cardList.addItem(newCard);
+  });
   popupAddCard.close();
 });
 
