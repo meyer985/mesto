@@ -22,18 +22,32 @@ function createCard(data, templateSelector) {
   return card.createCard();
 }
 
-//Отрисовка классом Section
-const cardList = new Section(
-  {
-    items: initialCards,
-    renderer: (element) => {
-      const newCard = createCard(element, ".template-card");
-      cardList.addItem(newCard);
+api.getCards().then((res) => {
+  const cardList = new Section(
+    {
+      items: res,
+      renderer: (element) => {
+        const newCard = createCard(element, ".template-card");
+        cardList.addItem(newCard);
+      },
     },
-  },
-  elementsList
-);
-cardList.cardRenderer();
+    elementsList
+  );
+  cardList.cardRenderer();
+});
+
+// //Отрисовка классом Section
+// const cardList = new Section(
+//   {
+//     items: initialCards,
+//     renderer: (element) => {
+//       const newCard = createCard(element, ".template-card");
+//       cardList.addItem(newCard);
+//     },
+//   },
+//   elementsList
+// );
+// cardList.cardRenderer();
 
 //ВАЛИДАЦИЯ
 
