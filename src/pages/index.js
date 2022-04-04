@@ -15,6 +15,7 @@ import { api } from "../components/Api.js";
 
 //функция создания новой карточки
 function createCard(data, templateSelector) {
+  // console.log(data.likes.length);
   const card = new Card(data, templateSelector, () => {
     preview.open(data);
   });
@@ -84,17 +85,6 @@ function openEditPopup() {
   editPopup.listOfInputs[0].value = userInfo.name;
   editPopup.listOfInputs[1].value = userInfo.about;
 }
-
-// //Попап добавления карточки
-// const popupAddCard = new PopupWithForm(".popup_type_add-item", (formData) => {
-//   const newCard = createCard(formData, ".template-card");
-
-//   cardList.addItem(newCard);
-//   popupAddCard.close();
-//   console.log(formData);
-// });
-
-//Попап добавления карточки
 
 const popupAddCard = new PopupWithForm(".popup_type_add-item", (formData) => {
   api.postNewCard(formData).then((res) => {

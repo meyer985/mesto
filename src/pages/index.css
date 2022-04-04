@@ -37,3 +37,5 @@
 @import url(../blocks/popup/__image-container/popup__image-container.css);
 @import url(../blocks/popup/__picture/popup__picture.css);
 @import url(../blocks/popup/__caption/popup__caption.css);
+@import url(../blocks/element/__like-container/element__like-container.css);
+@import url(../blocks/element/__like-counter/element__like-counter.css);

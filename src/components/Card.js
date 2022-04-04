@@ -12,6 +12,7 @@ export class Card {
     this._cardImage = this.newCard.querySelector(".element__image"); //ищем картинку
     this._likeButton = this.newCard.querySelector(".element__like"); //кнопка лайк
     this._deliteButton = this.newCard.querySelector(".element__delite"); //делит
+    this._likeCounter = this.newCard.querySelector(".element__like-counter");
 
     this._setEventListeners();
     this._setCardContent();
@@ -32,6 +33,7 @@ export class Card {
     this.newCard.querySelector(".element__text").innerText = this._data.name;
     this._cardImage.src = this._data.link;
     this._cardImage.alt = this._data.name;
+    this._likeCounter.innerText = this._data.likes.length;
   }
 
   _toggleLike = () => {
