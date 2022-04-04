@@ -6,7 +6,6 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { UserInfo } from "../components/UserInfo.js";
 import {
-  initialCards,
   config,
   editButton,
   addButton,
@@ -22,6 +21,7 @@ function createCard(data, templateSelector) {
   return card.createCard();
 }
 
+//отрисовка загруженного массива
 api.getCards().then((res) => {
   const cardList = new Section(
     {
@@ -35,19 +35,6 @@ api.getCards().then((res) => {
   );
   cardList.cardRenderer();
 });
-
-// //Отрисовка классом Section
-// const cardList = new Section(
-//   {
-//     items: initialCards,
-//     renderer: (element) => {
-//       const newCard = createCard(element, ".template-card");
-//       cardList.addItem(newCard);
-//     },
-//   },
-//   elementsList
-// );
-// cardList.cardRenderer();
 
 //ВАЛИДАЦИЯ
 
@@ -80,12 +67,26 @@ api.getUserInfo().then((result) => {
 });
 
 //ПОПАПЫ
+
 //попап редактирования данных пользователя
+///////****************************************************************************** */
 //объект попапа редактирования
+// const editPopup = new PopupWithForm(".popup_type_edit", (dataFromInputs) => {
+// // 1.повесить фетч
+
+//   infoUpdate.setUserInfo(dataFromInputs); //это вызвать внутри фетча с его возвратом
+
+//   editPopup.close();
+// });
+//************************************************************************************* */
+
 const editPopup = new PopupWithForm(".popup_type_edit", (dataFromInputs) => {
-  infoUpdate.setUserInfo(dataFromInputs);
+  api.updateProfileInfo(dataFromInputs).then((res) => {
+    infoUpdate.setUserInfo(res);
+  });
   editPopup.close();
 });
+
 editPopup.setEventListeners();
 
 editButton.addEventListener("click", openEditPopup);

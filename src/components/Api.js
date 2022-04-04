@@ -28,6 +28,25 @@ class Api {
       })
       .catch(() => console.log(res.status));
   }
+
+  updateProfileInfo(data) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about,
+      }),
+    })
+      .then((res) => {
+        if (res.status) {
+          return res.json();
+        } else {
+          return Promise.reject(res.status);
+        }
+      })
+      .catch(() => console.log(res.status));
+  }
 }
 
 export const api = new Api({
