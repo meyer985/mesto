@@ -103,3 +103,8 @@ addButton.addEventListener("click", () => {
 
 const preview = new PopupWithImage(".popup_type_picture"); //объект просмотра
 preview.setEventListeners();
+
+//******************************************* */
+
+const removePopup = document.querySelector(".popup_type_remove");
+removePopup.classList.add("popup_opened");

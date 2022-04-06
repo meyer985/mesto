@@ -138,6 +138,31 @@
         </div>
       </div>
 
+      <div class="popup popup_type_remove">
+        <div class="popup__container popup__container_type_remove">
+          <form
+            class="form form_type_remove"
+            name="remove-form"
+            action="none"
+            novalidate
+          >
+            <h2 class="form__heading">Вы уверены?</h2>
+            <input
+              type="submit"
+              class="form__submit form__submit_type_remove"
+              value="Да"
+            />
+            <button type="button" class="popup__close popup__close_type_remove">
+              <img
+                src="<%=require('./images/Close_Icon.png')%>"
+                alt="закрыть"
+                class="popup__cross"
+              />
+            </button>
+          </form>
+        </div>
+      </div>
+
       <div class="popup popup_type_picture">
         <div class="popup__image-container">
           <img
