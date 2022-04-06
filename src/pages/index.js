@@ -16,9 +16,18 @@ import { api } from "../components/Api.js";
 //функция создания новой карточки
 function createCard(data, templateSelector) {
   // console.log(data.likes.length);
-  const card = new Card(data, templateSelector, () => {
-    preview.open(data);
-  });
+  const card = new Card(
+    data,
+    templateSelector,
+    () => {
+      preview.open(data);
+    },
+    () => {
+      removeConfirmationPopup.open();
+    },
+    infoUpdate.getUserInfo()
+  );
+
   return card.createCard();
 }
 
@@ -94,6 +103,9 @@ const popupAddCard = new PopupWithForm(".popup_type_add-item", (formData) => {
   popupAddCard.close();
 });
 
+const removeConfirmationPopup = new PopupWithForm(".popup_type_remove");
+removeConfirmationPopup.setEventListeners();
+
 popupAddCard.setEventListeners();
 
 addButton.addEventListener("click", () => {
@@ -105,6 +117,3 @@ const preview = new PopupWithImage(".popup_type_picture"); //объект про
 preview.setEventListeners();
 
 //******************************************* */
-
-const removePopup = document.querySelector(".popup_type_remove");
-removePopup.classList.add("popup_opened");

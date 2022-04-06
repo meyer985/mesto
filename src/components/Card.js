@@ -1,8 +1,18 @@
+// import { data } from "autoprefixer";
+
 export class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(
+    data,
+    templateSelector,
+    handleCardClick,
+    handleDeliteClick,
+    cardOwner
+  ) {
     this._data = data;
     this._cardTemplate = document.querySelector(templateSelector).content;
     this._handleCardClick = handleCardClick;
+    this._handleDeliteClick = handleDeliteClick;
+    this._cardOwner = cardOwner;
   }
 
   createCard() {
@@ -34,14 +44,22 @@ export class Card {
     this._cardImage.src = this._data.link;
     this._cardImage.alt = this._data.name;
     this._likeCounter.innerText = this._data.likes.length;
+
+    if (
+      this._cardOwner.name !== this._data.owner.name ||
+      this._cardOwner.about !== this._data.owner.about
+    ) {
+      this._deliteButton.classList.add("element__delite_inactive");
+    }
   }
 
   _toggleLike = () => {
     this._likeButton.classList.toggle("element__like_active");
   };
 
-  _deliteCard = (event) => {
-    event.target.closest(".element").remove();
+  _deliteCard = () => {
+    this._handleDeliteClick();
+    // event.target.closest(".element").remove();
   };
 
   _openViewScreen = () => {

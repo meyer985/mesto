@@ -10,9 +10,13 @@
   background-position: center;
   background-repeat: no-repeat;
   border: none;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .element__delite:hover {
-  opacity: .5;
+  opacity: 0.5;
+}
+
+.element__delite_inactive {
+  display: none;
 }
