@@ -14,22 +14,31 @@ import {
 import { api } from "../components/Api.js";
 
 //функция создания новой карточки
+
 function createCard(data, templateSelector) {
-  // console.log(data.likes.length);
   const card = new Card(
     data,
     templateSelector,
     () => {
-      preview.open(data);
+      preview.open();
     },
-    () => {
+    (data) => {
       removeConfirmationPopup.open();
+      removeConfirmationPopup.updateSubmitHandler(() => {
+        api.deleteCard(data).then(() => {
+          card.deliteCard();
+          removeConfirmationPopup.close();
+        });
+      });
     },
     infoUpdate.getUserInfo()
   );
 
   return card.createCard();
 }
+
+const removeConfirmationPopup = new PopupWithForm(".popup_type_remove");
+removeConfirmationPopup.setEventListeners();
 
 const cardList = new Section(elementsList);
 
@@ -103,9 +112,6 @@ const popupAddCard = new PopupWithForm(".popup_type_add-item", (formData) => {
   popupAddCard.close();
 });
 
-const removeConfirmationPopup = new PopupWithForm(".popup_type_remove");
-removeConfirmationPopup.setEventListeners();
-
 popupAddCard.setEventListeners();
 
 addButton.addEventListener("click", () => {
@@ -115,5 +121,3 @@ addButton.addEventListener("click", () => {
 
 const preview = new PopupWithImage(".popup_type_picture"); //объект просмотра
 preview.setEventListeners();
-
-//******************************************* */

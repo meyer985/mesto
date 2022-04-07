@@ -66,6 +66,21 @@ class Api {
       })
       .catch(() => console.log(res.status));
   }
+
+  deleteCard(data) {
+    return fetch(`${this._baseUrl}/cards/${data._id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+      .then((res) => {
+        if (res.status) {
+          return res.json();
+        } else {
+          return Promise.reject(res.status);
+        }
+      })
+      .catch(() => console.log(res.status));
+  }
 }
 
 export const api = new Api({

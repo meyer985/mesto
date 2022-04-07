@@ -9,7 +9,9 @@ export class Card {
     cardOwner
   ) {
     this._data = data;
-    this._cardTemplate = document.querySelector(templateSelector).content;
+    this._cardTemplate = document
+      .querySelector(templateSelector)
+      .content.querySelector(".element");
     this._handleCardClick = handleCardClick;
     this._handleDeliteClick = handleDeliteClick;
     this._cardOwner = cardOwner;
@@ -34,7 +36,9 @@ export class Card {
   _setEventListeners() {
     //вешаем слушатели
     this._likeButton.addEventListener("click", this._toggleLike); //лайк
-    this._deliteButton.addEventListener("click", this._deliteCard); //делит
+    this._deliteButton.addEventListener("click", (event) => {
+      this._handleDeliteClick(this._data);
+    }); //делит
     this._cardImage.addEventListener("click", this._openViewScreen); //превью
   }
 
@@ -57,10 +61,10 @@ export class Card {
     this._likeButton.classList.toggle("element__like_active");
   };
 
-  _deliteCard = () => {
-    this._handleDeliteClick();
-    // event.target.closest(".element").remove();
-  };
+  deliteCard() {
+    console.log(this.newCard);
+    this.newCard.remove();
+  }
 
   _openViewScreen = () => {
     this._handleCardClick();

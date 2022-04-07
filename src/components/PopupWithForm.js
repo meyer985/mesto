@@ -28,4 +28,8 @@ export class PopupWithForm extends Popup {
     super.close();
     this._form.reset();
   }
+
+  updateSubmitHandler(fn) {
+    this._submitCallback = fn;
+  }
 }
