@@ -6,6 +6,7 @@ export class Card {
     templateSelector,
     handleCardClick,
     handleDeliteClick,
+    handleToggleLike,
     cardOwner
   ) {
     this._data = data;
@@ -15,6 +16,8 @@ export class Card {
     this._handleCardClick = handleCardClick;
     this._handleDeliteClick = handleDeliteClick;
     this._cardOwner = cardOwner;
+    this._handleToggleLike = handleToggleLike;
+    this._userId = data.userId;
   }
 
   createCard() {
@@ -36,6 +39,7 @@ export class Card {
   _setEventListeners() {
     //вешаем слушатели
     this._likeButton.addEventListener("click", this._toggleLike); //лайк
+
     this._deliteButton.addEventListener("click", (event) => {
       this._handleDeliteClick(this._data);
     }); //делит
@@ -58,11 +62,12 @@ export class Card {
   }
 
   _toggleLike = () => {
-    this._likeButton.classList.toggle("element__like_active");
+    this._handleToggleLike();
+    // this._likeButton.classList.toggle("element__like_active");
+    console.log(this._data);
   };
 
   deliteCard() {
-    console.log(this.newCard);
     this.newCard.remove();
   }
 

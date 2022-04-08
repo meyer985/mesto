@@ -82,9 +82,9 @@ class Api {
       .catch(() => console.log(res.status));
   }
 
-  putLike(data) {
-    return fetch(`${this._baseUrl}/cards/${data._id}`, {
-      method: "DELETE",
+  putLike(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: "PUT",
       headers: this._headers,
     })
       .then((res) => {
@@ -97,8 +97,8 @@ class Api {
       .catch(() => console.log(res.status));
   }
 
-  deliteLike(data) {
-    return fetch(`${this._baseUrl}/cards/${data._id}`, {
+  deliteLike(id) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
       headers: this._headers,
     })

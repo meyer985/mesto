@@ -13,6 +13,35 @@ import {
 } from "../utils/constants.js";
 import { api } from "../components/Api.js";
 
+let myId;
+const cardList = new Section(elementsList);
+
+Promise.all([api.getUserInfo(), api.getCards()]).then(
+  ([userData, cardsContent]) => {
+    //получаем данные пользователя
+    myId = userData._id;
+    infoUpdate.setUserInfo(userData);
+    changeAvatar(userData);
+
+    //рендерим карточки
+    cardList.cardRenderer({
+      items: cardsContent,
+      renderer: (item) => {
+        const newCard = createCard(item, ".template-card");
+        cardList.addItem(newCard);
+      },
+    });
+  }
+);
+console.log(myId);
+
+// api.getUserInfo().then((result) => {
+//   myId = result._id;
+//   //подставляем данные на страницу
+//   infoUpdate.setUserInfo(result);
+//   changeAvatar(result);
+// });
+
 //функция создания новой карточки
 
 function createCard(data, templateSelector) {
@@ -31,6 +60,18 @@ function createCard(data, templateSelector) {
         });
       });
     },
+    () => {
+      api.putLike(data._id).then((res) => {});
+      // if (card.isLiked()) {
+      //   api.deliteLike(data._id).then((res) => {
+      //     console.log(res);
+      //   });
+      // } else {
+      //   api.putLike(data._id).then((res) => {
+      //     console.log(res);
+      //   });
+      // }
+    },
     infoUpdate.getUserInfo()
   );
 
@@ -40,17 +81,17 @@ function createCard(data, templateSelector) {
 const removeConfirmationPopup = new PopupWithForm(".popup_type_remove");
 removeConfirmationPopup.setEventListeners();
 
-const cardList = new Section(elementsList);
+// const cardList = new Section(elementsList);
 
-api.getCards().then((res) => {
-  cardList.cardRenderer({
-    items: res,
-    renderer: (item) => {
-      const newCard = createCard(item, ".template-card");
-      cardList.addItem(newCard);
-    },
-  });
-});
+// api.getCards().then((res) => {
+//   cardList.cardRenderer({
+//     items: res,
+//     renderer: (item) => {
+//       const newCard = createCard(item, ".template-card");
+//       cardList.addItem(newCard);
+//     },
+//   });
+// });
 
 //ВАЛИДАЦИЯ
 
@@ -75,12 +116,6 @@ function changeAvatar(data) {
     ".profile__avatar"
   ).style.backgroundImage = `url(${data.avatar})`;
 }
-
-api.getUserInfo().then((result) => {
-  //подставляем данные на страницу
-  infoUpdate.setUserInfo(result);
-  changeAvatar(result);
-});
 
 //ПОПАПЫ
 
