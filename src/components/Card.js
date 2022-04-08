@@ -7,7 +7,7 @@ export class Card {
     handleCardClick,
     handleDeliteClick,
     handleToggleLike,
-    cardOwner
+    myId
   ) {
     this._data = data;
     this._cardTemplate = document
@@ -15,9 +15,9 @@ export class Card {
       .content.querySelector(".element");
     this._handleCardClick = handleCardClick;
     this._handleDeliteClick = handleDeliteClick;
-    this._cardOwner = cardOwner;
+    this._myId = myId;
+    this._authorId = data.owner._id;
     this._handleToggleLike = handleToggleLike;
-    this._userId = data.userId;
   }
 
   createCard() {
@@ -53,7 +53,7 @@ export class Card {
     this._cardImage.alt = this._data.name;
     this._likeCounter.innerText = this._data.likes.length;
 
-    if (this._cardOwner !== this._data.owner._id) {
+    if (this._myId !== this._authorId) {
       this._deliteButton.classList.add("element__delite_inactive");
     }
   }
@@ -61,7 +61,8 @@ export class Card {
   _toggleLike = () => {
     this._handleToggleLike();
     // this._likeButton.classList.toggle("element__like_active");
-    console.log(this._data);
+    console.log(this._myId);
+    console.log(this._authorId);
   };
 
   deliteCard() {
