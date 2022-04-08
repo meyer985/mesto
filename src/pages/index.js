@@ -72,7 +72,7 @@ function createCard(data, templateSelector) {
       //   });
       // }
     },
-    infoUpdate.getUserInfo()
+    myId
   );
 
   return card.createCard();

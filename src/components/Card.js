@@ -53,10 +53,7 @@ export class Card {
     this._cardImage.alt = this._data.name;
     this._likeCounter.innerText = this._data.likes.length;
 
-    if (
-      this._cardOwner.name !== this._data.owner.name ||
-      this._cardOwner.about !== this._data.owner.about
-    ) {
+    if (this._cardOwner !== this._data.owner._id) {
       this._deliteButton.classList.add("element__delite_inactive");
     }
   }
