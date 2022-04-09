@@ -105,6 +105,9 @@ editProfileValidator.enableValidation(); // вызываем метод
 const editAddCardValidator = new FormValidator(config, ".form_type_add-card"); //объект из класса
 editAddCardValidator.enableValidation(); // вызвали метод
 
+const changeAvatarValidator = new FormValidator(config, ".form_type_avatar");
+changeAvatarValidator.enableValidation();
+
 const infoUpdate = new UserInfo({
   //заюираем имя и проф со страницы
   //информация о пользователе
@@ -159,5 +162,14 @@ addButton.addEventListener("click", () => {
 const preview = new PopupWithImage(".popup_type_picture"); //объект просмотра
 preview.setEventListeners();
 
-// const avatar = new PopupWithForm(".popup_type_avatar");
-// avatar.open();
+const avatar = new PopupWithForm(".popup_type_avatar", (formData) => {
+  api.updateAvatar(formData.link).then((res) => {
+    changeAvatar(res);
+  });
+  avatar.close();
+});
+
+avatar.setEventListeners();
+
+const editAvatar = document.querySelector(".profile__overlay");
+editAvatar.addEventListener("click", () => avatar.open());

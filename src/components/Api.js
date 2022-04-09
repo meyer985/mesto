@@ -111,6 +111,24 @@ class Api {
       })
       .catch(() => console.log(res.status));
   }
+
+  updateAvatar(link) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: link,
+      }),
+    })
+      .then((res) => {
+        if (res.status) {
+          return res.json();
+        } else {
+          return Promise.reject(res.status);
+        }
+      })
+      .catch(() => console.log(res.status));
+  }
 }
 
 export const api = new Api({
