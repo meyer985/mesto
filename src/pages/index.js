@@ -33,7 +33,6 @@ Promise.all([api.getUserInfo(), api.getCards()]).then(
     });
   }
 );
-console.log(myId);
 
 // api.getUserInfo().then((result) => {
 //   myId = result._id;
@@ -61,16 +60,21 @@ function createCard(data, templateSelector) {
       });
     },
     () => {
-      api.putLike(data._id).then((res) => {});
-      // if (card.isLiked()) {
-      //   api.deliteLike(data._id).then((res) => {
-      //     console.log(res);
-      //   });
-      // } else {
-      //   api.putLike(data._id).then((res) => {
-      //     console.log(res);
-      //   });
-      // }
+      if (card.isItLiked()) {
+        card.deliteLike();
+        api.deliteLike(data._id).then((res) => {
+          card._countOfLikes = res.likes;
+          console.log("res=>", res.likes);
+          console.log("card data=>", card._countOfLikes);
+        });
+      } else {
+        card.setLike();
+        api.putLike(data._id).then((res) => {
+          card._countOfLikes = res.likes;
+          console.log("res=>", res.likes);
+          console.log("card data=>", card._countOfLikes);
+        });
+      }
     },
     myId
   );
