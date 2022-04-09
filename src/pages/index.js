@@ -34,13 +34,6 @@ Promise.all([api.getUserInfo(), api.getCards()]).then(
   }
 );
 
-// api.getUserInfo().then((result) => {
-//   myId = result._id;
-//   //подставляем данные на страницу
-//   infoUpdate.setUserInfo(result);
-//   changeAvatar(result);
-// });
-
 //функция создания новой карточки
 
 function createCard(data, templateSelector) {
@@ -63,13 +56,11 @@ function createCard(data, templateSelector) {
       if (card.isItLiked()) {
         card.deliteLike();
         api.deliteLike(data._id).then((res) => {
-          card.countOfLikes = res.likes;
           card.setLikeCounter(res.likes);
         });
       } else {
         card.setLike();
         api.putLike(data._id).then((res) => {
-          card.countOfLikes = res.likes;
           card.setLikeCounter(res.likes);
         });
       }
@@ -80,51 +71,41 @@ function createCard(data, templateSelector) {
   return card.createCard();
 }
 
-const removeConfirmationPopup = new PopupWithForm(".popup_type_remove");
-removeConfirmationPopup.setEventListeners();
-
-// const cardList = new Section(elementsList);
-
-// api.getCards().then((res) => {
-//   cardList.cardRenderer({
-//     items: res,
-//     renderer: (item) => {
-//       const newCard = createCard(item, ".template-card");
-//       cardList.addItem(newCard);
-//     },
-//   });
-// });
-
 //ВАЛИДАЦИЯ
 
 //валидаци формы профиля пользователя
-const editProfileValidator = new FormValidator(config, ".form"); // объект
+const editProfileValidator = new FormValidator(config, ".form");
 editProfileValidator.enableValidation(); // вызываем метод
 
 //валидация формы добавления карточки
-const editAddCardValidator = new FormValidator(config, ".form_type_add-card"); //объект из класса
+const editAddCardValidator = new FormValidator(config, ".form_type_add-card");
 editAddCardValidator.enableValidation(); // вызвали метод
 
+//валидация обновления
 const changeAvatarValidator = new FormValidator(config, ".form_type_avatar");
 changeAvatarValidator.enableValidation();
 
+//получение информации о пользователе со страницы
 const infoUpdate = new UserInfo({
-  //заюираем имя и проф со страницы
-  //информация о пользователе
   name: ".info__name",
   about: ".info__profession",
 });
 
+//замена аватарки из {объекта пользователя}
 function changeAvatar(data) {
-  //замена аватарки из {объекта пользователя}
   document.querySelector(
     ".profile__avatar"
   ).style.backgroundImage = `url(${data.avatar})`;
 }
 
 //ПОПАПЫ
+//подтверждение удаления карточки
+
+const removeConfirmationPopup = new PopupWithForm(".popup_type_remove");
+removeConfirmationPopup.setEventListeners();
 
 //попап редактирования данных пользователя
+editButton.addEventListener("click", openEditPopup);
 
 const editPopup = new PopupWithForm(".popup_type_edit", (dataFromInputs) => {
   api.updateProfileInfo(dataFromInputs).then((res) => {
@@ -135,14 +116,18 @@ const editPopup = new PopupWithForm(".popup_type_edit", (dataFromInputs) => {
 
 editPopup.setEventListeners();
 
-editButton.addEventListener("click", openEditPopup);
-
 function openEditPopup() {
   editPopup.open();
   const userInfo = infoUpdate.getUserInfo();
   editPopup.listOfInputs[0].value = userInfo.name;
   editPopup.listOfInputs[1].value = userInfo.about;
 }
+
+//поп-ап добавления карточки
+addButton.addEventListener("click", () => {
+  popupAddCard.open();
+  editAddCardValidator.resetValidation();
+});
 
 const popupAddCard = new PopupWithForm(".popup_type_add-item", (formData) => {
   api.postNewCard(formData).then((res) => {
@@ -154,13 +139,13 @@ const popupAddCard = new PopupWithForm(".popup_type_add-item", (formData) => {
 
 popupAddCard.setEventListeners();
 
-addButton.addEventListener("click", () => {
-  popupAddCard.open();
-  editAddCardValidator.resetValidation();
-});
-
-const preview = new PopupWithImage(".popup_type_picture"); //объект просмотра
+//поп-ап окна просмотра
+const preview = new PopupWithImage(".popup_type_picture");
 preview.setEventListeners();
+
+//поп-ап замены аватарки
+const editAvatar = document.querySelector(".profile__overlay");
+editAvatar.addEventListener("click", () => avatar.open());
 
 const avatar = new PopupWithForm(".popup_type_avatar", (formData) => {
   api.updateAvatar(formData.link).then((res) => {
@@ -170,6 +155,3 @@ const avatar = new PopupWithForm(".popup_type_avatar", (formData) => {
 });
 
 avatar.setEventListeners();
-
-const editAvatar = document.querySelector(".profile__overlay");
-editAvatar.addEventListener("click", () => avatar.open());
