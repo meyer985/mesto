@@ -40,18 +40,30 @@ function createCard(data, templateSelector) {
   const card = new Card(
     data,
     templateSelector,
+
+    //обработчик превью
     () => {
       preview.open(data);
     },
+
+    //обработчик удаления
     (data) => {
       removeConfirmationPopup.open();
       removeConfirmationPopup.updateSubmitHandler(() => {
-        api.deleteCard(data).then(() => {
-          card.deliteCard();
-          removeConfirmationPopup.close();
-        });
+        removeConfirmationPopup.submit.value = "Удаление...";
+        api
+          .deleteCard(data)
+          .then(() => {
+            card.deliteCard();
+            removeConfirmationPopup.close();
+          })
+          .finally(() => {
+            removeConfirmationPopup.submit.value = "Да";
+          });
       });
     },
+
+    //обработчик лайка
     () => {
       if (card.isItLiked()) {
         card.deliteLike();
@@ -81,7 +93,7 @@ editProfileValidator.enableValidation(); // вызываем метод
 const editAddCardValidator = new FormValidator(config, ".form_type_add-card");
 editAddCardValidator.enableValidation(); // вызвали метод
 
-//валидация обновления
+//валидация обновления аватара
 const changeAvatarValidator = new FormValidator(config, ".form_type_avatar");
 changeAvatarValidator.enableValidation();
 
@@ -99,6 +111,7 @@ function changeAvatar(data) {
 }
 
 //ПОПАПЫ
+
 //подтверждение удаления карточки
 
 const removeConfirmationPopup = new PopupWithForm(".popup_type_remove");
@@ -108,9 +121,15 @@ removeConfirmationPopup.setEventListeners();
 editButton.addEventListener("click", openEditPopup);
 
 const editPopup = new PopupWithForm(".popup_type_edit", (dataFromInputs) => {
-  api.updateProfileInfo(dataFromInputs).then((res) => {
-    infoUpdate.setUserInfo(res);
-  });
+  editPopup.submit.value = "Сохранение...";
+  api
+    .updateProfileInfo(dataFromInputs)
+    .then((res) => {
+      infoUpdate.setUserInfo(res);
+    })
+    .finally(() => {
+      editPopup.submit.value = "Сохраненить";
+    });
   editPopup.close();
 });
 
@@ -130,10 +149,16 @@ addButton.addEventListener("click", () => {
 });
 
 const popupAddCard = new PopupWithForm(".popup_type_add-item", (formData) => {
-  api.postNewCard(formData).then((res) => {
-    const newCard = createCard(res, ".template-card");
-    cardList.addItem(newCard);
-  });
+  popupAddCard.submit.value = "Сохранение...";
+  api
+    .postNewCard(formData)
+    .then((res) => {
+      const newCard = createCard(res, ".template-card");
+      cardList.addItem(newCard);
+    })
+    .finally(() => {
+      popupAddCard.submit.value = "Создать";
+    });
   popupAddCard.close();
 });
 
@@ -148,9 +173,15 @@ const editAvatar = document.querySelector(".profile__overlay");
 editAvatar.addEventListener("click", () => avatar.open());
 
 const avatar = new PopupWithForm(".popup_type_avatar", (formData) => {
-  api.updateAvatar(formData.link).then((res) => {
-    changeAvatar(res);
-  });
+  avatar.submit.value = "Сохранение...";
+  api
+    .updateAvatar(formData.link)
+    .then((res) => {
+      changeAvatar(res);
+    })
+    .finally(() => {
+      avatar.submit.value = "Создать";
+    });
   avatar.close();
 });
 
