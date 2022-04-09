@@ -48,7 +48,7 @@ function createCard(data, templateSelector) {
     data,
     templateSelector,
     () => {
-      preview.open();
+      preview.open(data);
     },
     (data) => {
       removeConfirmationPopup.open();
@@ -159,5 +159,5 @@ addButton.addEventListener("click", () => {
 const preview = new PopupWithImage(".popup_type_picture"); //объект просмотра
 preview.setEventListeners();
 
-const avatar = new PopupWithForm(".popup_type_avatar");
-avatar.open();
+// const avatar = new PopupWithForm(".popup_type_avatar");
+// avatar.open();

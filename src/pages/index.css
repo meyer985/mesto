@@ -44,3 +44,5 @@
 @import url(../blocks/form/__submit/_type/form__submit_type_remove.css);
 @import url(../blocks/form/__submit/_type/form__submit_type_avatar.css);
 @import url(../blocks/form/__input/_type/form__input_type_avatar.css);
+@import url(../blocks/profile/__pen/profile__pen.css);
+@import url(../blocks/profile/__overlay/profile__overlay.css);
