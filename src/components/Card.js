@@ -52,7 +52,6 @@ export class Card {
     this.newCard.querySelector(".element__text").innerText = this._data.name;
     this._cardImage.src = this._data.link;
     this._cardImage.alt = this._data.name;
-    this._likeCounter.innerText = this._data.likes.length;
 
     if (this._myId !== this._authorId) {
       this._deliteButton.classList.add("element__delite_inactive");
@@ -63,6 +62,8 @@ export class Card {
     } else {
       this.deliteLike();
     }
+
+    this.setLikeCounter(this._countOfLikes);
   }
 
   isItLiked() {
@@ -77,10 +78,11 @@ export class Card {
 
   deliteLike = () => {
     this._likeButton.classList.remove("element__like_active");
-    // console.log(this._myId);
-    // console.log(this._data.likes);
-    // console.log(this.isItLiked);
   };
+
+  setLikeCounter(likes) {
+    this._likeCounter.innerText = likes.length;
+  }
 
   deliteCard() {
     this.newCard.remove();
