@@ -158,3 +158,6 @@ addButton.addEventListener("click", () => {
 
 const preview = new PopupWithImage(".popup_type_picture"); //объект просмотра
 preview.setEventListeners();
+
+const avatar = new PopupWithForm(".popup_type_avatar");
+avatar.open();

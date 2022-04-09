@@ -181,6 +181,45 @@
         </div>
       </div>
 
+      <!-- **********замена аватара********************** -->
+      <div class="popup popup_type_avatar">
+        <div class="popup__container popup__container_type_avatar">
+          <form
+            class="form form_type_avatar"
+            name="avatar"
+            action="none"
+            novalidate
+          >
+            <h2 class="form__heading">Обновить аватар</h2>
+
+            <input
+              type="url"
+              name="link"
+              class="form__input form__input_type_avatar form__input_type_url"
+              id="input-url"
+              value=""
+              placeholder="Ссылка на картинку"
+              required
+            />
+            <span
+              class="form__error-message form__error-message_input-url"
+            ></span>
+            <input
+              type="submit"
+              class="form__submit form__submit_type_add"
+              value="Сохранить"
+            />
+            <button type="button" class="popup__close popup__close_type_avatar">
+              <img
+                src="<%=require('./images/Close_Icon.png')%>"
+                alt="закрыть"
+                class="popup__cross"
+              />
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- **********замена аватара********************** -->
       <template class="template-card">
         <li class="element">
           <img src="тест" alt="шаблон" class="element__image" />
