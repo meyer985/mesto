@@ -63,16 +63,14 @@ function createCard(data, templateSelector) {
       if (card.isItLiked()) {
         card.deliteLike();
         api.deliteLike(data._id).then((res) => {
-          card._countOfLikes = res.likes;
-          console.log("res=>", res.likes);
-          console.log("card data=>", card._countOfLikes);
+          card.countOfLikes = res.likes;
+          card.setLikeCounter(res.likes);
         });
       } else {
         card.setLike();
         api.putLike(data._id).then((res) => {
-          card._countOfLikes = res.likes;
-          console.log("res=>", res.likes);
-          console.log("card data=>", card._countOfLikes);
+          card.countOfLikes = res.likes;
+          card.setLikeCounter(res.likes);
         });
       }
     },

@@ -18,7 +18,7 @@ export class Card {
     this._myId = myId;
     this._authorId = data.owner._id;
     this._handleToggleLike = handleToggleLike;
-    this._countOfLikes = data.likes;
+    this.countOfLikes = data.likes;
   }
 
   createCard() {
@@ -63,11 +63,11 @@ export class Card {
       this.deliteLike();
     }
 
-    this.setLikeCounter(this._countOfLikes);
+    this.setLikeCounter(this.countOfLikes);
   }
 
   isItLiked() {
-    return this._countOfLikes.find((user) => user._id === this._myId)
+    return this.countOfLikes.find((user) => user._id === this._myId)
       ? true
       : false;
   }
