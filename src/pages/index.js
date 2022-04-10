@@ -21,7 +21,7 @@ Promise.all([api.getUserInfo(), api.getCards()]).then(
     //получаем данные пользователя
     myId = userData._id;
     infoUpdate.setUserInfo(userData);
-    changeAvatar(userData);
+    infoUpdate.changeAvatar(userData);
 
     //рендерим карточки
     cardList.cardRenderer({
@@ -57,6 +57,7 @@ function createCard(data, templateSelector) {
             card.deliteCard();
             removeConfirmationPopup.close();
           })
+          .catch(() => console.log(res.status))
           .finally(() => {
             removeConfirmationPopup.submit.value = "Да";
           });
@@ -67,14 +68,20 @@ function createCard(data, templateSelector) {
     () => {
       if (card.isItLiked()) {
         card.deliteLike();
-        api.deliteLike(data._id).then((res) => {
-          card.setLikeCounter(res.likes);
-        });
+        api
+          .deliteLike(data._id)
+          .then((res) => {
+            card.setLikeCounter(res.likes);
+          })
+          .catch(() => console.log(res.status));
       } else {
         card.setLike();
-        api.putLike(data._id).then((res) => {
-          card.setLikeCounter(res.likes);
-        });
+        api
+          .putLike(data._id)
+          .then((res) => {
+            card.setLikeCounter(res.likes);
+          })
+          .catch(() => console.log(res.status));
       }
     },
     myId
@@ -103,13 +110,6 @@ const infoUpdate = new UserInfo({
   about: ".info__profession",
 });
 
-//замена аватарки из {объекта пользователя}
-function changeAvatar(data) {
-  document.querySelector(
-    ".profile__avatar"
-  ).style.backgroundImage = `url(${data.avatar})`;
-}
-
 //ПОПАПЫ
 
 //подтверждение удаления карточки
@@ -126,11 +126,12 @@ const editPopup = new PopupWithForm(".popup_type_edit", (dataFromInputs) => {
     .updateProfileInfo(dataFromInputs)
     .then((res) => {
       infoUpdate.setUserInfo(res);
+      editPopup.close();
     })
+    .catch(() => console.log(res.status))
     .finally(() => {
-      editPopup.submit.value = "Сохраненить";
+      editPopup.submit.value = "Сохранить";
     });
-  editPopup.close();
 });
 
 editPopup.setEventListeners();
@@ -155,11 +156,12 @@ const popupAddCard = new PopupWithForm(".popup_type_add-item", (formData) => {
     .then((res) => {
       const newCard = createCard(res, ".template-card");
       cardList.addItem(newCard);
+      popupAddCard.close();
     })
+    .catch(() => console.log(res.status))
     .finally(() => {
       popupAddCard.submit.value = "Создать";
     });
-  popupAddCard.close();
 });
 
 popupAddCard.setEventListeners();
@@ -170,19 +172,23 @@ preview.setEventListeners();
 
 //поп-ап замены аватарки
 const editAvatar = document.querySelector(".profile__overlay");
-editAvatar.addEventListener("click", () => avatar.open());
+editAvatar.addEventListener("click", () => {
+  avatar.open();
+  changeAvatarValidator.resetValidation();
+});
 
 const avatar = new PopupWithForm(".popup_type_avatar", (formData) => {
   avatar.submit.value = "Сохранение...";
   api
     .updateAvatar(formData.link)
     .then((res) => {
-      changeAvatar(res);
+      infoUpdate.changeAvatar(res);
+      avatar.close();
     })
+    .catch(() => console.log(res.status))
     .finally(() => {
       avatar.submit.value = "Создать";
     });
-  avatar.close();
 });
 
 avatar.setEventListeners();
